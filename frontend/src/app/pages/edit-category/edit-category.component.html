@@ -1,0 +1,16 @@
+<div class="centered-content">
+    <div class="modal-box">
+        
+        <h1 class="title">
+            Edit Category
+        </h1>
+
+        <input #categoryTitleInput class="input has-background-light is-medium" type="text" placeholder="Edit category name...">
+        <br><br>
+        <div class="buttons is-right">
+            <button class="button is-medium" routerLink="/">Cancel</button>
+            <button class="button is-primary is-medium" (click)="updateCategory(categoryTitleInput.value)">Save</button>
+        </div>
+
+    </div>
+</div>
