@@ -45,4 +45,6 @@ ng generate component pages/new-task
 - Frontend updated
   - includes buttons to edit and delete tasks (which send CRUD operation web requests through the api)
   - includes a dropdown box containing buttons to edit and delete categories (dropdown and other buttons created with the help of Bulma and Font Awesome documentation)
+- Categories can be updated and deleted smoothly
 - More testing completed through Postman and Angular Frontend
+- Research and practice on sorting tasks in progress 
