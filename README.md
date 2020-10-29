@@ -2,7 +2,7 @@
 
 #
 
- Welcome to Greg's Task Manager! This application was created in response to the CLARK Take Home Interview Project. For more information, click [here](https://github.com/Cyber4All/join-the-team).
+ Welcome to Greg's Task Manager!
  
  <img src="assets/frontpage.gif" alt="Greg's Task Manager Logo" width="700"/>
  
@@ -13,7 +13,7 @@
 
 ## Prerequisites
 
-This application was create using the MEAN stack (**MongoDB**, **Express**, **Angular**, **Node.js**). Information on installing Node on your machine and starting an instnace of MongoDB through **Docker** can be found [here](https://github.com/Cyber4All/join-the-team/#setup). 
+This application was create using the MEAN stack (**MongoDB**, **Express**, **Angular**, **Node.js**). Information on installing Node on your machine and starting an instnace of MongoDB through **Docker** can be found [here](https://medium.com/zenofai/how-to-build-a-node-js-and-mongodb-application-with-docker-containers-15e535baabf5). 
 
 ## How It Works
 
