@@ -19,6 +19,13 @@ export class LoginPageComponent implements OnInit {
   ngOnInit(): void {
     this.taskService.getConfigs().subscribe((configs: Config[]) => {
       this.configs = configs; 
+      
+      if (this.configs.length > 0 )
+      {
+        document.getElementById("pageTitle").innerHTML = '' + this.configs[0].displayName;
+      } else {
+        document.getElementById("pageTitle").innerHTML = "Task Manager";
+      }
     })
   }
 
