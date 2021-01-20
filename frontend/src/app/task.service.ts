@@ -46,7 +46,16 @@ export class TaskService {
     return this.webReqService.delete(`categories/${categoryId}/tasks/${taskId}`);
   }
 
+  // Configs
+  getConfigs() {
+    return this.webReqService.get('configs');
+  }
 
+  updateConfig(displayName: string, colorCode: string ) {
+    return this.webReqService.patch(`configs`, { displayName, colorCode }); 
+  }
+
+  
   complete(task: Task) {
     return this.webReqService.patch(`categories/${task._categoryId}/tasks/${task._id}`, {
       completed: !task.completed

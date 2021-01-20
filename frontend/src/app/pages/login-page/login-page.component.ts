@@ -2,6 +2,8 @@ import { HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth.service';
+import { TaskService } from 'src/app/task.service';
+import { Config } from 'src/app/models/config.model';
 
 @Component({
   selector: 'app-login-page',
@@ -10,9 +12,14 @@ import { AuthService } from 'src/app/auth.service';
 })
 export class LoginPageComponent implements OnInit {
 
-  constructor(private authService: AuthService, private router: Router) { }
+  configs: Config[];
+
+  constructor(private taskService: TaskService, private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
+    this.taskService.getConfigs().subscribe((configs: Config[]) => {
+      this.configs = configs; 
+    })
   }
 
   onLoginButtonClicked(email: string, password: string) {

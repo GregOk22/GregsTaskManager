@@ -1,8 +1,0 @@
-{
-    "name": "TaskManager",
-    "description": "",
-    "license": "ISC",
-    "dependencies": {
-        "mongodb": "^3.6.2"
-    }
-}

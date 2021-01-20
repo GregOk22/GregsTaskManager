@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { EditCategoryComponent } from './pages/edit-category/edit-category.component';
+import { EditConfigComponent } from './pages/edit-config/edit-config.component';
 import { EditTaskComponent } from './pages/edit-task/edit-task.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { NewCategoryComponent } from './pages/new-category/new-category.component';
@@ -17,7 +18,8 @@ const routes: Routes = [
   {path: 'categories/:categoryId/edit-task/:taskId', component: EditTaskComponent},
   {path: 'categories', component: TaskViewComponent},
   {path: 'categories/:categoryId', component: TaskViewComponent},
-  {path: 'categories/:categoryId/new-task', component: NewTaskComponent}
+  {path: 'categories/:categoryId/new-task', component: NewTaskComponent},
+  {path: 'edit-config', component: EditConfigComponent}
 ];
 
 @NgModule({

@@ -6,7 +6,7 @@ const bodyParser =  require('body-parser');
 
 
 // Load mongoose models
-const { Category, Task, User } = require('./db/models');
+const { Category, Task, User, Config } = require('./db/models');
 const { JsonWebTokenError } = require('jsonwebtoken');
 const jwt = require('jsonwebtoken');
 
@@ -328,6 +328,33 @@ app.get('/users/me/access-token', verifySession, (req,res) => {
     });
 })
 
+/* CONFIG ROUTES */
+app.get('/configs', (req, res) => {
+    Config.find({}).then((configs) => {
+        res.send(configs);
+    })
+})
+
+app.post('/configs', (req, res) => {
+    let displayName = req.body.displayName;
+    let colorCode = req.body.colorCode;
+
+    let newConfig = new Config({
+        displayName,
+        colorCode
+    });
+    newConfig.save().then((configDoc) => {
+        res.send(configDoc);
+    })
+})
+
+app.patch('/configs', (req, res) => {
+    Config.update({
+        $set: req.body
+    }).then(() => {
+        res.sendStatus(200);
+    });
+});
 
 
 /* HELPER METHODS */

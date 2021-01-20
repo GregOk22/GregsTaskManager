@@ -3,7 +3,8 @@
 const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
-mongoose.connect('mongodb://myUserAdmin:pass@localhost:27017/TaskManager?authSource=admin', { 
+//mongoose.connect('mongodb://myUserAdmin:pass@localhost:27017/TaskManager?authSource=admin', { 
+mongoose.connect('mongodb://localhost:27017/GregsTaskManager', {   
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,
