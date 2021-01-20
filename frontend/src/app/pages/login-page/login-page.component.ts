@@ -15,7 +15,7 @@ export class LoginPageComponent implements OnInit {
   configs: Config[];
 
   constructor(private taskService: TaskService, private authService: AuthService, private router: Router) { }
-
+  
   ngOnInit(): void {
     this.taskService.getConfigs().subscribe((configs: Config[]) => {
       this.configs = configs; 
@@ -23,6 +23,7 @@ export class LoginPageComponent implements OnInit {
       if (this.configs.length > 0 )
       {
         document.getElementById("pageTitle").innerHTML = '' + this.configs[0].displayName;
+        document.getElementById("newToTaskManagerText").innerHTML = '' + this.configs[0].displayName;
       } else {
         document.getElementById("pageTitle").innerHTML = "Task Manager";
       }
