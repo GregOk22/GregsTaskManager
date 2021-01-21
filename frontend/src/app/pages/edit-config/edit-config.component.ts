@@ -21,6 +21,8 @@ export class EditConfigComponent implements OnInit {
     this.taskService.updateConfig(displayName, colorCode).subscribe(() => {
       this.router.navigate(['/configs']);
     })
+
+    alert("Configuration Settings Updated!");
   }
 
 }
