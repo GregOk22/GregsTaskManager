@@ -56,13 +56,19 @@
                 </div>
     
                 <!-- Task Elements -->
-                <div class="task" *ngFor="let task of tasks" (click)="onTaskClick(task)" [ngClass]="{ 'completed': task.completed }">
+                <div class="task" *ngFor="let task of tasks" (click)="onTaskClick(task)" [ngClass]="{ 'completed': task.completed, 'highPriority': task.highPriority }">
                     <div class="task-text">
-                        <p>{{ task.title }}</p>
+                        <p id="taskText">{{ task.title }}</p>
 
                     </div>
 
                     <div class="task-buttons">
+                        <button class="button" (click)="onHighPriorityTaskClick(task)">
+                            <div class="icon">
+                                <i class="fas fa-exclamation"></i>
+                            </div>
+                        </button>
+
                         <button class="button" [routerLink]="['/categories', selectedCategoryId, 'edit-task', task._id]" style="margin-right: 10px;">
                             <div class="icon">
                                 <i class="fas fa-edit"></i>

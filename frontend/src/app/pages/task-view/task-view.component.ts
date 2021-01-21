@@ -29,6 +29,8 @@ export class TaskViewComponent implements OnInit {
 
           this.taskService.getTasks(params.categoryId).subscribe((tasks: Task[]) => {
             this.tasks = tasks;
+
+            // for loop through tasks, also change text color to red if color is white (vicecersa)
           })
         } else {
           this.tasks = undefined;
@@ -48,8 +50,24 @@ export class TaskViewComponent implements OnInit {
   });
 */
 
+  // Each click actually changes status
+
   onTaskClick(task: Task) {
     // set task to complete
+    this.taskService.complete(task).subscribe(() => {
+      console.log("Completion change successful!");
+      task.completed = !task.completed;
+    })
+  }
+
+  onHighPriorityTaskClick(task: Task) {
+    // set task to high priority
+    this.taskService.setHighPriority(task).subscribe(() => {
+      console.log("High Priority change successful!");
+      task.highPriority = !task.highPriority;
+    })
+
+    // change task completion status back
     this.taskService.complete(task).subscribe(() => {
       console.log("Completion change successful!");
       task.completed = !task.completed;

@@ -62,4 +62,10 @@ export class TaskService {
     });
   }
 
+  setHighPriority(task: Task) {
+    return this.webReqService.patch(`categories/${task._categoryId}/tasks/${task._id}`, {
+      highPriority: !task.highPriority
+    });
+  }
+
 }

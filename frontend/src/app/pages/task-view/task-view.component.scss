@@ -103,6 +103,11 @@
         opacity: 80% ;
     }
 
+    &.highPriority .task-text {
+        color: red;
+        font-weight: bold;
+    }
+
     .task-text {
         display: flex;
         flex-grow: 1;
