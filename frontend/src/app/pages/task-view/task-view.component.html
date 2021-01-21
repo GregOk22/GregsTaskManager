@@ -16,7 +16,7 @@
 
             </div>
 
-            <button class="button" style="background-color: #82d1f1;" routerLink="/new-category">+ New Category</button>
+            <button class="button" style="background-color: #82d1f1; color: black;" routerLink="/new-category">+ New Category</button>
 
         </div>
 
@@ -24,7 +24,7 @@
         <div class="task-list-container has-background-light">
             <div *ngIf="tasks">
                 <div class="top-bar">
-                    <h1 class="title has-text-primary">
+                    <h1 class="title" style="color: #82d1f1;">
                         Tasks
                     </h1>
 
@@ -80,7 +80,7 @@
     
                 <h3 class="empty-state-text" *ngIf="tasks.length === 0">No tasks here! Click the '+' button below to create a task.</h3>
 
-                <button class="circle-add-button button is-primary" routerLink="./new-task">
+                <button class="circle-add-button button" style="background-color: #82d1f1;" routerLink="./new-task">
                     <img src="../../../assets/plus-sign.png">
                 </button>
             </div>
@@ -90,7 +90,5 @@
             </div>
 
         </div>
-
-
     </div>
 </div>
