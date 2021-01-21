@@ -3,4 +3,5 @@ export class Task {
     _categoryId: string;
     title: string;
     completed: boolean;
+    highPriority: boolean;
 }
