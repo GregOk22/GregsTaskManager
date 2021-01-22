@@ -18,11 +18,11 @@ export class AppComponent implements OnInit {
     this.taskService.getConfigs().subscribe((configs: Config[]) => {
       this.configs = configs; 
       
+      // When no color code is specified (field is left empty), default is used (specified in main-styles.scss)
       if (this.configs.length > 0 )
       {
         document.body.style.backgroundColor = '' + this.configs[0].colorCode;
       }
-      // When no color code is specified (field is left empty), default is used (specified in main-styles.scss)
     })
   }
 }

@@ -1,11 +1,19 @@
 <div class="centered-content">
-    <div class="modal-box">
+    <div class="modal-box" enctpye="multipart/form-data">
         
         <h1 class="title">
             Create a New Task
         </h1>
 
         <input #taskTitleInput class="input has-background-light is-medium" type="text" placeholder="Enter task name...">
+        
+        <div class="upload-attachment-content">
+            <label for="attachment" class="subtitle">Upload Attachment:</label>
+            <br>
+            <input type="file" name="attachment" id="attachment">
+            <p>(maximum file size = 10MB)</p>
+        </div>
+
         <br><br>
         <div class="buttons is-right">
             <button class="button is-medium" routerLink="/">Cancel</button>

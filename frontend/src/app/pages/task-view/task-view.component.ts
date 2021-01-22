@@ -29,8 +29,6 @@ export class TaskViewComponent implements OnInit {
 
           this.taskService.getTasks(params.categoryId).subscribe((tasks: Task[]) => {
             this.tasks = tasks;
-
-            // for loop through tasks, also change text color to red if color is white (vicecersa)
           })
         } else {
           this.tasks = undefined;
