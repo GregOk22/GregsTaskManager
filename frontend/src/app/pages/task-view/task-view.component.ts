@@ -6,6 +6,7 @@ import { CommonModule } from "@angular/common";
 import { BrowserModule } from '@angular/platform-browser'
 import { Task } from 'src/app/models/task.model';
 import { Category } from 'src/app/models/category.model';
+import { AuthService } from 'src/app/auth.service';
 
 @Component({
   selector: 'app-task-view',
@@ -19,7 +20,7 @@ export class TaskViewComponent implements OnInit {
 
   selectedCategoryId: string;
 
-  constructor(private taskService: TaskService, private route: ActivatedRoute, private router: Router) { }
+  constructor(private taskService: TaskService, private authService: AuthService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
     this.route.params.subscribe(
@@ -84,5 +85,9 @@ export class TaskViewComponent implements OnInit {
       this.tasks = this.tasks.filter(val => val._id !== id);
       console.log(res);
     })
+  }
+
+  onLogoutClick() {
+    this.authService.logout();
   }
 }

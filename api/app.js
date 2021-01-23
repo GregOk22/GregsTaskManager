@@ -3,6 +3,10 @@ const app = express();
 const MongoClient = require('mongodb').MongoClient;
 const {mongoose} = require('./db/mongoose');
 const bodyParser =  require('body-parser');
+const multer = require('multer');
+
+// Make uploads folder publicly accessible (url / (filename in uploads))
+app.use(express.static('db/uploads'));
 
 
 // Load mongoose models
@@ -94,6 +98,36 @@ let verifySession = (req, res, next) => {
     })
 }
 
+// MULTER CONFIGURATION (file storage)
+
+const storage = multer.diskStorage({
+    destination: function(req, file, cb) {
+        cb(null, '../api/db/uploads/')
+    },
+    filename: function(req, file, cb) {
+        cb(null, new Date().toISOString() + file.originalname);
+    }
+});
+
+/* Add filters to file
+const fileFilter = (req, file, cb) => {
+    if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
+        // Accept these file types
+        cb(null, true);
+    } else {
+        cb(null, false)
+    }
+};
+*/
+
+const upload = multer({
+    storage: storage, 
+    limits: {
+        fileSize: 1024*1024*5
+    } // additional properties can be addded (ex. fileFilter)
+});
+
+
 /* END OF MIDDLEWARE */
 
 
@@ -171,7 +205,8 @@ app.get('/categories/:categoryId/tasks/:taskId', authenticate, (req,res) => {
 });
 
 //create a task in a category
-app.post('/categories/:categoryId/tasks', authenticate, (req,res) => {
+app.post('/categories/:categoryId/tasks', authenticate, upload.single('taskAttachment'), (req,res) => {
+    console.log(req.file)
     Category.findOne({
         _id: req.params.categoryId,
         _userId: req.user_id
@@ -188,7 +223,8 @@ app.post('/categories/:categoryId/tasks', authenticate, (req,res) => {
         if (canCreateTask) {
             let newTask = new Task({
                 title: req.body.title,
-                _categoryId: req.params.categoryId
+                _categoryId: req.params.categoryId,
+                attachment: req.file.filename
             });
             newTask.save().then((newTaskDoc) => {
                 res.send(newTaskDoc);

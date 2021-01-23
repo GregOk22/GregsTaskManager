@@ -34,7 +34,7 @@ export class TaskService {
     return this.webReqService.get(`categories/${categoryId}/tasks`)
   }
 
-  createTask(title: string, categoryId: string ) {
+  createTask(title: string, categoryId: string) {
     return this.webReqService.post(`categories/${categoryId}/tasks`, { title }); 
   }
 
@@ -54,7 +54,6 @@ export class TaskService {
   updateConfig(displayName: string, colorCode: string ) {
     return this.webReqService.patch(`configs`, { displayName, colorCode }); 
   }
-
   
   complete(task: Task) {
     return this.webReqService.patch(`categories/${task._categoryId}/tasks/${task._id}`, {

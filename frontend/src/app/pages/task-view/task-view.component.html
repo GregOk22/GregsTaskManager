@@ -15,9 +15,10 @@
                 </a>
 
             </div>
-
+            <hr style="border-color: black; height: 2px;">
             <button class="button" style="background-color: #82d1f1; color: black; margin-bottom: 10px;" routerLink="/new-category">+ New Category</button>
-            <button class="button" style="background-color: #82d1f1; color: black;" routerLink="/edit-config">Settings</button>
+            <button class="button" style="background-color: #82d1f1; color: black; margin-bottom: 10px;" routerLink="/edit-config">Settings</button>
+            <button class="button" style="background-color: #ff0000; color: white;" (click)="onLogoutClick()">Sign Out</button>
 
         </div>
 
@@ -59,7 +60,8 @@
                 <!-- Task Elements -->
                 <div class="task" *ngFor="let task of tasks" (click)="onTaskClick(task)" [ngClass]="{ 'completed': task.completed, 'highPriority': task.highPriority }">
                     <div class="task-text">
-                        <p id="taskText">{{ task.title }}</p>
+                        <p id="taskText" style="line-height: 50px; margin-right: 20px;">{{ task.title }}</p>
+                        <img src="http://localhost:3000/{{ task.attachment }}" style="height: 50px;">
 
                     </div>
 

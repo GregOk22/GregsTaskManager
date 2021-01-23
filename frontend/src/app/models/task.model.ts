@@ -4,4 +4,5 @@ export class Task {
     title: string;
     completed: boolean;
     highPriority: boolean;
+    attachment: string
 }

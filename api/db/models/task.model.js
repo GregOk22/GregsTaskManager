@@ -18,6 +18,10 @@ const TaskSchema = new mongoose.Schema({
     highPriority: {
         type: Boolean,
         default: false
+    },
+    attachment: {
+        type: String,
+        required: false
     }
 })
 

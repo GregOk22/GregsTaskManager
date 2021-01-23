@@ -1,18 +1,22 @@
 <div class="centered-content">
-    <div class="modal-box" enctpye="multipart/form-data">
-        
+    <div class="modal-box">
+        <!---
         <h1 class="title">
             Create a New Task
         </h1>
-
-        <input #taskTitleInput class="input has-background-light is-medium" type="text" placeholder="Enter task name...">
+    --->
+        <form action="" method="POST" enctpye="multipart/form-data" name="newTaskForm">
+            <label for="title" class="title">Create a New Task</label>
+            <input #taskTitleInput class="input has-background-light is-medium" type="text" name="title" placeholder="Enter task name..." style="margin-top: 20px;">
         
-        <div class="upload-attachment-content">
-            <label for="attachment" class="subtitle">Upload Attachment:</label>
-            <br>
-            <input type="file" name="attachment" id="attachment">
-            <p>(maximum file size = 10MB)</p>
-        </div>
+            <div class="upload-attachment-content" enctpye="multipart/form-data">
+                <label for="taskAttachment" class="subtitle">Upload Attachment:</label>
+                <br>
+                <input #attachmentInput type="file" name="taskAttachment" id="taskAttachment" class="form-control-file">
+                <p>(maximum file size = 10MB)</p>
+                <button type="submit" onclick="redirectToCategory()">Upload</button>
+            </div>
+        </form>
 
         <br><br>
         <div class="buttons is-right">
@@ -20,5 +24,6 @@
             <button class="button is-medium" style="background-color: #82d1f1;" (click)="createTask(taskTitleInput.value)">Create</button>
         </div>
 
+        
     </div>
 </div>
