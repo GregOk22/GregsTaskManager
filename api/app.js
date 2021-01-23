@@ -289,7 +289,6 @@ app.delete('/categories/:categoryId/tasks/:taskId', authenticate, (req,res) => {
             }).then((removedTaskDoc) => {
                 res.send(removedTaskDoc);
             });
-
         } else {
             res.sendStatus(404);
         }

@@ -41,7 +41,24 @@ export class TaskViewComponent implements OnInit {
     this.taskService.getCategories().subscribe((categories: Category[]) => {
       this.categories = categories; 
     })
+
+    
+    // Refreshes page once this page opens (to ensure all tasks are displayed)
+    if( window.localStorage )
+    {
+      if( !localStorage.getItem('firstLoad') )
+      {
+        localStorage['firstLoad'] = true;
+        window.location.reload();
+      }  
+      else {
+        localStorage.removeItem('firstLoad');
+      }
+    }
+    
+
   }
+
 
 /*
   tasks.sort(function(obj1, obj2) {
