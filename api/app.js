@@ -4,10 +4,11 @@ const MongoClient = require('mongodb').MongoClient;
 const {mongoose} = require('./db/mongoose');
 const bodyParser =  require('body-parser');
 const multer = require('multer');
+const cron = require('node-cron');
+const nodemailer = require('nodemailer');
 
 // Make uploads folder publicly accessible (url / (filename in uploads))
 app.use(express.static('db/uploads'));
-
 
 // Load mongoose models
 const { Category, Task, User, Config } = require('./db/models');
@@ -17,7 +18,7 @@ const jwt = require('jsonwebtoken');
 
 /* START OF MIDDLEWARE */
 
-// Load middleware
+// Load body parser middleware
 app.use(bodyParser.json());
 
 // CORS headers middleware
@@ -127,6 +128,124 @@ const upload = multer({
     } // additional properties can be addded (ex. fileFilter)
 });
 
+
+// EMAIL CONFIGURATION
+// get email addresses
+User.find({}, function(err, users) {
+    var userEmails = new Array(users.length);
+    var counter = 0;
+    users.forEach(function(user) {
+        var selectedUserEmail = "";
+        var selectedDisplayName = "";
+        var selectedCategoryTitle = "";
+        var bodyOfEmailText = "";
+
+        // saves email address to array
+        userEmails[counter] = user.email;
+        selectedUserEmail = user.email;
+        console.log("user email: " + selectedUserEmail);
+        //bodyOfEmailText += selectedUserEmail;
+
+        //save display name from config data
+        Config.find({}).then((configs) => {
+            configs.forEach(function(config) {
+                selectedDisplayName = config.displayName;
+                console.log("display name: " + selectedDisplayName);
+
+                // string file containing body of email (starting point)
+                bodyOfEmailText += "Hello! Here's your daily summary of tasks from " + selectedDisplayName + ". \n\n";
+
+                // get categories
+                console.log('user id: ' + user.id);
+                Category.find({
+                    _userId: user.id
+                }).then((categories) => {
+                    categories.forEach(function(category) {
+                        //selectedCategoryTitle = category.title;
+                        // Adding category name to body of email
+                        //bodyOfEmailText += "Category: " + selectedCategoryTitle + "\n";
+
+                        console.log("Category ID: " + category._id);
+
+                        // get tasks
+                        Task.find({
+                            _categoryId: category._id
+                        }).then((tasks) => {
+                            // Set current category title and add to body of email
+                            selectedCategoryTitle = category.title;
+                            bodyOfEmailText += "Category: " + selectedCategoryTitle + "\n";
+
+                            // Loop through tasks of categories
+                            tasks.forEach(function(task) {
+                                console.log("Checking if im in a task");
+                                console.log("Task title: " + task.title);
+                                //var numberTemp = categories.length - 1;
+                                //console.log("Category last index is: " + numberTemp);
+                                //console.log("Current Category index: " + categories.indexOf(category) + ". Current task index" + tasks.indexOf(task));
+                                
+                                // add task information to body of email
+                                bodyOfEmailText += "\tTask: " + task.title + "\n";
+                                
+                                var priorityYesNo = "No";
+                                if (task.highPriority === true)
+                                {
+                                    priorityYesNo = "No";
+                                }
+                                bodyOfEmailText += "\t\tHigh Priority?: " + priorityYesNo + "\n";
+
+                                var completedYesNo = "No";
+                                if (task.completed === true)
+                                {
+                                    completedYesNo = "Yes";
+                                }
+                                bodyOfEmailText += "\t\tCompleted?: " + completedYesNo + "\n";
+
+                                var attachmentYesNo = "No";
+                                if (task.attachment != null)
+                                {
+                                    attachmentYesNo = "Yes";
+                                }
+                                bodyOfEmailText += "\t\tFile attached?: " + attachmentYesNo + "\n\n";
+
+                                var lastCategoryIndex = categories.length - 1;
+                                var lastTaskIndex = tasks.length - 1;
+
+                                // Add an extra space if this is the last task in a category
+                                if (tasks.indexOf(task) === lastTaskIndex)
+                                {
+                                    bodyOfEmailText += "\n";
+                                }
+
+                                if (categories.indexOf(category) === lastCategoryIndex && tasks.indexOf(task) === lastTaskIndex)
+                                {
+                                    console.log("This is the end of the email message body.\n");
+
+                                    bodyOfEmailText += "Task attachments can be found in the app. Thanks for using " + selectedDisplayName + "!";
+                                    console.log("Current Body of Email: " + bodyOfEmailText);
+                                }
+                            })
+                        })
+                    })
+                })
+                
+            })
+        })
+
+        let mailOptions = {
+            from: 'taskmanagerwebappsummary@gmail.com',
+            to: '' + userEmails[counter],
+            subject: '' + Config.findOne
+        };
+        counter++;
+    });
+});
+
+/*
+let mailOptions = {
+    from: 'taskmanagerwebappsummary@gmail.com',
+    to:
+}
+*/
 
 /* END OF MIDDLEWARE */
 
