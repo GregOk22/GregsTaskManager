@@ -222,6 +222,38 @@ User.find({}, function(err, users) {
 
                                     bodyOfEmailText += "Task attachments can be found in the app. Thanks for using " + selectedDisplayName + "!";
                                     console.log("Current Body of Email: " + bodyOfEmailText);
+
+                                    //  email options
+                                    let mailOptions = {
+                                        from: 'taskmanagerwebappsummary@gmail.com',
+                                        to: selectedUserEmail,
+                                        subject: 'Daily Task Summary from ' + selectedDisplayName,
+                                        text: bodyOfEmailText
+                                    };
+
+                                    // email transporter
+                                    let transporter = nodemailer.createTransport({
+                                        service: 'gmail',
+                                        auth: {
+                                            user: 'taskmanagerwebappsummary@gmail.com',
+                                            pass: 'TaskManagerWebAppSummaryPass123!'
+                                        }
+                                    });
+
+                                    cron.schedule('46 0 * * *', () => {
+                                        // send email
+                                        transporter.sendMail(mailOptions, function(error, info){
+                                            if (error) {
+                                                console.log(error);
+                                            } else {
+                                                console.log('Email sent: ' + info.response);
+                                            }
+                                        });
+                                    }, {
+                                        scheduled: true,
+                                        timezone: "America/New_York"
+                                    });
+
                                 }
                             })
                         })
