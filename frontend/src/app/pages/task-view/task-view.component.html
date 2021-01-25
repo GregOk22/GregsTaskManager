@@ -66,7 +66,7 @@
                 <div class="task" *ngFor="let task of tasks" (click)="onTaskClick(task)" [ngClass]="{ 'completed': task.completed, 'highPriority': task.highPriority }">
                     <div class="task-text">
                         <p id="taskText" style="line-height: 50px; margin-right: 20px;">{{ task.title }}</p>
-                        <img src="http://localhost:3000/{{ task.attachment }}" style="height: 50px;">
+                        <img src="http://localhost:3000/{{ task.attachment }}" style="height: 50px;" id="taskImage" onerror='this.style.display = "none"'>
 
                     </div>
 

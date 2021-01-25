@@ -192,7 +192,7 @@ User.find({}, function(err, users) {
                                 bodyOfEmailText += "\t\tCompleted?: " + completedYesNo + "\n";
 
                                 var attachmentYesNo = "No";
-                                if (task.attachment != null)
+                                if (task.attachment != "")
                                 {
                                     attachmentYesNo = "Yes";
                                 }
@@ -347,6 +347,12 @@ app.get('/categories/:categoryId/tasks/:taskId', authenticate, (req,res) => {
 //create a task in a category
 app.post('/categories/:categoryId/tasks', authenticate, upload.single('taskAttachment'), (req,res) => {
     console.log(req.file)
+    // sets variable to filename if there is a file attached
+    var requestedFilename = "";
+    if (req.file != null)
+    {
+        requestedFilename = req.file.filename;
+    }
     Category.findOne({
         _id: req.params.categoryId,
         _userId: req.user_id
@@ -364,7 +370,7 @@ app.post('/categories/:categoryId/tasks', authenticate, upload.single('taskAttac
             let newTask = new Task({
                 title: req.body.title,
                 _categoryId: req.params.categoryId,
-                attachment: req.file.filename
+                attachment: requestedFilename
             });
             newTask.save().then((newTaskDoc) => {
                 res.send(newTaskDoc);
