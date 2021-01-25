@@ -140,23 +140,18 @@ User.find({}, function(err, users) {
         var selectedCategoryTitle = "";
         var bodyOfEmailText = "";
 
-        // saves email address to array
-        userEmails[counter] = user.email;
+        // saves current email address to local variable
         selectedUserEmail = user.email;
-        console.log("user email: " + selectedUserEmail);
-        //bodyOfEmailText += selectedUserEmail;
 
         //save display name from config data
         Config.find({}).then((configs) => {
             configs.forEach(function(config) {
                 selectedDisplayName = config.displayName;
-                console.log("display name: " + selectedDisplayName);
 
                 // string file containing body of email (starting point)
                 bodyOfEmailText += "Hello! Here's your daily summary of tasks from " + selectedDisplayName + ". \n\n";
 
                 // get categories
-                console.log('user id: ' + user.id);
                 Category.find({
                     _userId: user.id
                 }).then((categories) => {
@@ -164,8 +159,6 @@ User.find({}, function(err, users) {
                         //selectedCategoryTitle = category.title;
                         // Adding category name to body of email
                         //bodyOfEmailText += "Category: " + selectedCategoryTitle + "\n";
-
-                        console.log("Category ID: " + category._id);
 
                         // get tasks
                         Task.find({
@@ -177,8 +170,6 @@ User.find({}, function(err, users) {
 
                             // Loop through tasks of categories
                             tasks.forEach(function(task) {
-                                console.log("Checking if im in a task");
-                                console.log("Task title: " + task.title);
                                 //var numberTemp = categories.length - 1;
                                 //console.log("Category last index is: " + numberTemp);
                                 //console.log("Current Category index: " + categories.indexOf(category) + ". Current task index" + tasks.indexOf(task));
@@ -218,8 +209,6 @@ User.find({}, function(err, users) {
 
                                 if (categories.indexOf(category) === lastCategoryIndex && tasks.indexOf(task) === lastTaskIndex)
                                 {
-                                    console.log("This is the end of the email message body.\n");
-
                                     bodyOfEmailText += "Task attachments can be found in the app. Thanks for using " + selectedDisplayName + "!";
                                     console.log("Current Body of Email: " + bodyOfEmailText);
 

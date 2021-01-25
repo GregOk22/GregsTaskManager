@@ -55,7 +55,7 @@ export class TaskViewComponent implements OnInit {
         localStorage.removeItem('firstLoad');
       }
     }
-    
+
 
   }
 
@@ -106,5 +106,17 @@ export class TaskViewComponent implements OnInit {
 
   onLogoutClick() {
     this.authService.logout();
+  }
+
+  onSortCompletedClick() {
+    this.tasks.sort(function(a,b) {
+      return (a.completed === b.completed)? 0 : a.completed? -1 : 1;
+    });
+  }
+
+  onSortPriorityClick() {
+    this.tasks.sort(function(a,b) {
+      return (a.highPriority === b.highPriority)? 0 : a.highPriority? -1 : 1;
+    });
   }
 }

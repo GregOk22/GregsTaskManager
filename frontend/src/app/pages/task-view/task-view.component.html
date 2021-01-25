@@ -48,9 +48,14 @@
                                 </a>
 
                                 <hr class="dropdown-divider">
-                                <a href="#" class="dropdown-item">
-                                  Grid
+
+                                <a (click)="onSortCompletedClick()" class="dropdown-item">
+                                    Sort by Completed
                                 </a>
+                                <a (click)="onSortPriorityClick()" class="dropdown-item">
+                                    Sort by Priority
+                                </a>
+            
                               </div>
                         </div>
                     </div>
