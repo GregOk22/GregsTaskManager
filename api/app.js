@@ -180,7 +180,7 @@ User.find({}, function(err, users) {
                                 var priorityYesNo = "No";
                                 if (task.highPriority === true)
                                 {
-                                    priorityYesNo = "No";
+                                    priorityYesNo = "Yes";
                                 }
                                 bodyOfEmailText += "\t\tHigh Priority?: " + priorityYesNo + "\n";
 
@@ -229,7 +229,7 @@ User.find({}, function(err, users) {
                                         }
                                     });
 
-                                    cron.schedule('46 0 * * *', () => {
+                                    cron.schedule('27 22 * * *', () => {
                                         // send email
                                         transporter.sendMail(mailOptions, function(error, info){
                                             if (error) {
@@ -242,7 +242,6 @@ User.find({}, function(err, users) {
                                         scheduled: true,
                                         timezone: "America/New_York"
                                     });
-
                                 }
                             })
                         })
