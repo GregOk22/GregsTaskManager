@@ -18,23 +18,24 @@ This application was create using the MEAN stack (**MongoDB**, **Express**, **An
 ## How It Works
 
 The application first authenticates a user then redirects them to the task manager. The following operations can be performed:
+- Configure app display name
+- Configure app background color
 - Create a user
 - Authenticate a user
 - Maintain sessions through the use of JSON Web Tokens
-- Create a task
-- Rename a task
-- Mark a task as complete
-- Delete a task
+- End a user session
 - Create a category
 - Rename a category
-- Add a task to a category
-- Delete a task from a category
+- Delete a category
+- Create a task in category
+- Rename a task
+- Attach a file/image attachment to a task
+- Mark a task as complete
+- Mark a task as high priority
+- Delete a task
+- Send daily email summary of all categories/tasks to each user
 
 <img src="assets/TaskManagerScreenshot.png" alt="Greg's Task Manager Logo" width="700"/>
-
-The following operations can not be performed yet:
-- Sort tasks by the date they were created
-- Sort tasks by whether they are completed or not
 
 ## How To Start
 
