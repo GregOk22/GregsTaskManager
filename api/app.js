@@ -229,7 +229,7 @@ User.find({}, function(err, users) {
                                         }
                                     });
 
-                                    cron.schedule('27 22 * * *', () => {
+                                    cron.schedule('30 9 * * *', () => {
                                         // send email
                                         transporter.sendMail(mailOptions, function(error, info){
                                             if (error) {
