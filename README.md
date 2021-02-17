@@ -40,7 +40,7 @@ The application first authenticates a user then redirects them to the task manag
 ## How To Start
 
 The application can be used by following these steps:
-1. Run the container on Docker Desktop to start a MongoDB instance
+1. Start a MongoDB instance
 2. Run the following command in the api folder to start the api and connect it to MongoDB:
 ```
 nodemon app.js
