@@ -6,7 +6,7 @@
  
  <img src="assets/frontpage.gif" alt="Greg's Task Manager Logo" width="700"/>
  
- Version 2.0 Update Video: 
+ Version 2.0 Update Video (Click the unmute icon!): 
 
 https://user-images.githubusercontent.com/68796717/204380710-124fd35d-895e-47dc-a84d-71268bcd310b.mp4
 
